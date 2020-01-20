@@ -34,7 +34,7 @@ export const Button = props => (
     styleId={ `keg-web-button` }
     { ...props }
     Element={ Element }
-    elType='web'
+    isWeb={ true }
   />
 )
 

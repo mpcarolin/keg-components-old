@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { isStr, isNum } from 'jsutils'
 import { Picker } from 'react-native'
 const SelectOption = Picker.Item
@@ -13,7 +14,7 @@ export const Option = props => {
   const { label, children, text, value } = props
 
   return (
-    <SelectOption 
+    <SelectOption
       label={ getVal(label, value, text) }
       value={ getVal(value, text, children, label) }
     />

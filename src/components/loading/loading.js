@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from 're-theme'
+import { useTheme } from 'KegReTheme'
 import { View } from 'KegView'
 import { Indicator } from 'KegIndicator'
-import { Text } from '../'
+import { Text } from '../typography/text'
 import { isValidComponent } from '../../utils'
 
 /**

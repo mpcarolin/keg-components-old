@@ -1,8 +1,8 @@
 import React from 'react'
-import { useTheme } from 're-theme'
+import { useTheme } from 'KegReTheme'
 import { indicatorUri } from '../../assets/spinners/moderate'
 import { getImgSrc } from '../../utils'
-import { View } from '../'
+import { View } from 'KegView'
 
 const buildStyles = (theme, style, styles, styleId, isWeb) => {
   const built = {}
@@ -25,14 +25,25 @@ const buildStyles = (theme, style, styles, styleId, isWeb) => {
 }
 
 
-export const IndicatorImage = props => {
-  const { alt, ImgComp, isWeb, resizeMode, src, source, style, styles, styleId } = props
+export const IndicatorWrapper = props => {
+  const {
+    alt,
+    Element,
+    isWeb,
+    resizeMode,
+    src,
+    source,
+    style,
+    styles,
+    styleId
+  } = props
+
   const theme = useTheme()
   const builtStyles = buildStyles(theme, style, styles || {}, styleId, isWeb)
 
   return (
     <View style={ builtStyles.wrapper } >
-      <ImgComp
+      <Element
         alt={ alt || 'Loading' }
         style={ builtStyles.img }
         resizeMode={ resizeMode || 'contain' }

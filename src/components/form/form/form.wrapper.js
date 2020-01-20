@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme } from 're-theme'
+import { useTheme } from 'KegReTheme'
 import PropTypes from 'prop-types'
 
 const buildStyles = (styleId, theme, type, elType) => {
@@ -22,13 +22,13 @@ export const FormWrapper = React.forwardRef((props, ref) => {
     children,
     Element,
     elType,
+    isWeb,
     style,
     styleId,
     type,
     ...elProps
   } = props
 
-  const isWeb = elType === 'web'
   const builtStyles = buildStyles(styleId, theme, type, elType)
 
 

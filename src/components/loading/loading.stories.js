@@ -2,14 +2,15 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { View, Loading } from '../../'
+import { Loading } from '../../'
+import { StoryWrap } from 'StoryWrap'
 
-const stories = storiesOf('Loading', module)
+const storyStyles = { textAlign: 'center' }
 
-const viewStyles = { maxWidth: '80vw', margin: 'auto', marginTop: 30,  textAlign: 'center' }
+storiesOf('Loading', module).add('Default', () =>
+  <StoryWrap style={ storyStyles } >
 
-stories.add('Default', () =>
-  <View style={ viewStyles } >
     <Loading text={ 'Loading' } />
-  </View>
+
+  </StoryWrap>
 )

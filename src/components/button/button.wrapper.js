@@ -1,11 +1,11 @@
 import React from 'react'
-import { useTheme, useThemeActive, useThemeHover } from 're-theme'
+import { useTheme, useThemeActive, useThemeHover } from 'KegReTheme'
 import { get } from 'jsutils'
 import { getPressHandler, getActiveOpacity } from '../../utils'
 import PropTypes from 'prop-types'
 
-const buildStyles = (styleId, theme, type, elType) => {
-  styleId = styleId || `keg-${elType}-button`
+const buildStyles = (styleId, theme, type) => {
+  styleId = styleId || `keg-button`
 
   const normal = theme.get(
     `${styleId}-${type || 'default'}`,
@@ -28,24 +28,24 @@ export const ButtonWrapper = props => {
   
   const {
     Element,
-    elType,
     children,
     disabled,
+    isWeb,
     onClick,
     onPress,
     ref,
     styleId,
     style,
+    styles,
     text,
     type,
     ...elProps
   } = props
-
-  const isWeb = elType === 'web'
-  const builtStyles = buildStyles(styleId, theme, type, elType)
+  
+  const builtStyles = buildStyles(styleId, theme, type)
 
   const [ hoverRef, hoverStyle ] = useThemeHover(
-    theme.join(builtStyles.normal, style),
+    builtStyles.normal,
     get(theme, 'components.button.hover'),
     { ref }
   )
@@ -61,7 +61,13 @@ export const ButtonWrapper = props => {
       elProps={ elProps }
       ref={ useRef }
       disabled={ disabled }
-      style={ disabled ? builtStyles.disabled : useStyle }
+      style={ theme.join(
+        useStyle,
+        styles && styles.normal,
+        disabled && builtStyles.disabled,
+        disabled && styles && styles.disabled,
+        style
+      )}
       children={ children || text || 'button' }
       { ...getPressHandler(isWeb, onClick, onPress) }
       { ...getActiveOpacity(isWeb, props, useStyle) }

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from 're-theme'
+import { useTheme } from 'KegReTheme'
 import { getOnChangeHandler, getValueFromChildren, getInputValueKey, getReadOnly } from '../../../utils'
 
 /**
@@ -24,12 +24,11 @@ const getValue = ({ children, onChange, onValueChange, readOnly, value }, isWeb)
  * @param {string} styleId - Cached id of the styles
  * @param {Object} theme - Global theme object
  * @param {string} type - Type of select theme to use
- * @param {string} elType - Platform type
  *
  * @returns {Object} - Contains all built stlyes
  */
-const buildStyles = (styleId, theme, type, elType) => {
-  styleId = styleId || `keg-${elType}-select`
+const buildStyles = (styleId, theme, type) => {
+  styleId = styleId || `keg-select`
 
   const select = theme.get(
     `${styleId}-${type || 'default'}`,
@@ -46,8 +45,8 @@ export const SelectWrapper = props => {
     children,
     editable,
     disabled,
-    elType,
     Element,
+    isWeb,
     readOnly,
     onChange,
     onValueChange,
@@ -58,8 +57,7 @@ export const SelectWrapper = props => {
     ...elProps
   } = props
   
-  const styles = buildStyles(styleId, theme, type, elType)
-  const isWeb = elType === 'web'
+  const styles = buildStyles(styleId, theme, type)
 
   return (
     <Element
@@ -81,7 +79,6 @@ SelectWrapper.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  elType: PropTypes.string,
   onChange: PropTypes.func,
   onValueChange: PropTypes.func,
   ref: PropTypes.object,

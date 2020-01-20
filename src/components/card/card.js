@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from 're-theme'
+import { useTheme } from 'KegReTheme'
 import { deepMerge, isStr, get } from 'jsutils'
 import { CardImage } from './cardImage'
 import { CardContainer, CardFooter, CardHeader } from './cardContent'
-import { View } from '../'
+import { View } from 'KegView'
 
 const buildStyles = (styles, styleId, theme) => {
   const cardStyles = {}

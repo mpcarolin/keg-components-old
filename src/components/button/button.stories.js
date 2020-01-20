@@ -6,24 +6,32 @@ import { Button, Text } from '../../'
 import { action } from '@storybook/addon-actions'
 import { StoryWrap } from 'StoryWrap'
 
-const stories = storiesOf('Button', module)
+const TextComp = props => <Text>Keg Button</Text>
+const buttonStyle = { width: 150 }
 
-stories.add('Default', () =>
-  <StoryWrap>
-    <Button style={{ width: 150, margin: 'auto' }} onClick={action("Button Clicked!")}>
-      <Text>
-        Keg Button
-      </Text>
-    </Button>
-  </StoryWrap>
-)
+storiesOf('Button', module)
+  .add('Default', () =>
+    <StoryWrap style={{ textAlign: 'center' }} >
 
-stories.add('Disabled', () =>
-  <StoryWrap>
-    <Button disabled={ true } style={{ width: 150, margin: 'auto' }} onClick={action("Button Clicked!")}>
-      <Text>
-        Keg Button
-      </Text>
-    </Button>
-  </StoryWrap>
-)
+      <Button 
+        style={ buttonStyle }
+        onClick={ action("Button Clicked!") }
+      >
+        <TextComp />
+      </Button>
+
+    </StoryWrap>
+  )
+  .add('Disabled', () =>
+    <StoryWrap style={{ textAlign: 'center' }} >
+
+      <Button 
+        disabled={ true }
+        style={ buttonStyle }
+        onClick={ action("Disabled Button Clicked!") }
+      >
+        <TextComp />
+      </Button>
+
+    </StoryWrap>
+  )

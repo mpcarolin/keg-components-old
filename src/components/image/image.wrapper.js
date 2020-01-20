@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useTheme, useThemeHover } from 're-theme'
+import { useTheme, useThemeHover } from 'KegReTheme'
 import { get, checkCall } from 'jsutils'
 import PropTypes from 'prop-types'
-import { Loading } from '../'
+import { Loading } from '../loading'
 import { View } from 'KegView'
 import { getImgSrc, getPressHandler, getOnLoad } from '../../utils'
 
@@ -14,8 +14,8 @@ const onLoadEvent = (setLoading, props, setStyle, loadedStyle) => {
   }
 }
 
-const buildStyles = (style, styles, styleId, theme, type, imgType) => {
-  styleId = styleId || `keg-${imgType}-image`
+const buildStyles = (style, styles, styleId, theme, type) => {
+  styleId = styleId || `keg-image`
 
   const defStyle = theme.get(
     `${styleId}-${type}`,
@@ -85,8 +85,8 @@ export const ImageWrapper = props => {
   const {
     alt,
     children,
-    imgType,
-    Img,
+    Element,
+    isWeb,
     onClick,
     onPress,
     ref,
@@ -98,15 +98,13 @@ export const ImageWrapper = props => {
     type,
     ...attrs
   } = props
-  
-  const isWeb = imgType === 'web'
+
   const builtStyles = buildStyles(
     style,
     styles || {},
     styleId,
     theme,
-    type || 'default',
-    imgType
+    type || 'default'
   )
 
   const [ useRef, useStyle, setStyle ] = useThemeHover(
@@ -125,7 +123,7 @@ export const ImageWrapper = props => {
         />
       )}
 
-      <Img
+      <Element
         ref={ useRef }
         attrs={ attrs }
         alt={ alt }
