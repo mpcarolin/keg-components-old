@@ -2,21 +2,6 @@ import { pipeline, isStr, isEmpty } from 'jsutils'
 import { useState, useEffect } from 'react'
 
 /**
- * Returns an array of unique items for an autocomplete menu
- * @param {String} text 
- * @param {Array} possibleValues - string array
- */
-export const getAutocompleteItems = (text, possibleValues) => {
-  // get all items that are substrings of text, ignoring case and accents
-  const items = possibleValues
-    .filter(item => item && stringIncludes(item, text, [ ignoreCase, ignoreAccents ]))
-    .map(item => ({ text: item }))
-
-  // remove duplicates
-  return Array.from(new Set(items))
-}
-
-/**
  * Custom hook for acquiring menu items that are filtered based on text.
  * @param {String} text 
  * @param {Array} menuItems - all menu items
@@ -34,6 +19,21 @@ export const useAutocompleteItems = ( text, menuItems ) => {
   }, [ text, menuItems, selectedItem ])
 
   return [ autocompleteItems, setSelectedItem, selectedItem ]
+}
+
+/**
+ * Returns an array of unique items for an autocomplete menu
+ * @param {String} text 
+ * @param {Array} possibleValues - string array
+ */
+export const getAutocompleteItems = (text, possibleValues) => {
+  // get all items that are substrings of text, ignoring case and accents
+  const items = possibleValues
+    .filter(item => item && stringIncludes(item, text, [ ignoreCase, ignoreAccents ]))
+    .map(item => ({ text: item }))
+
+  // remove duplicates
+  return Array.from(new Set(items))
 }
 
 /**

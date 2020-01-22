@@ -5,6 +5,7 @@ import { option } from './option'
 import { radio } from './radio'
 import { select } from './select'
 import { switchStyles } from './switch'
+import { autocomplete } from './autocomplete'
 
 export const form = {
   checkbox,
@@ -14,4 +15,5 @@ export const form = {
   radio,
   select,
   switch: switchStyles,
+  autocomplete,
 }
