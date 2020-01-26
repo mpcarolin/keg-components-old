@@ -1,31 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme, useThemeActive, useThemeHover } from 'KegReTheme'
-import { get } from 'jsutils'
-import { getPressHandler, getActiveOpacity } from '../../utils'
+import { get, isFunc } from 'jsutils'
 import PropTypes from 'prop-types'
+import { Text } from '../typography/text'
+import {
+  getPressHandler,
+  getActiveOpacity,
+  isValidComponent,
+  renderFromType
+} from '../../utils'
 
-const buildStyles = (styleId, theme, type) => {
-  styleId = styleId || `keg-button`
+const buildStyles = (styles, theme, type) => {
 
-  const normal = theme.get(
-    `${styleId}-${type || 'default'}`,
-    'components.button.default',
-    type && `components.button.${type}`
-  )
+  const btnTheme = get(theme, [ 'components', 'button' ], [])
 
-  const disabled = theme.get(
-    `${styleId}-${type || 'default'}-disabled`,
-    normal,
-    'components.button.disabled',
-  )
+  return btnTheme[type] || btnTheme.default
 
-  return { normal, disabled }
+}
+
+const getChildren = (Children, theme, activeStyle, styles) => {
+  
+  const style = theme.join(activeStyle.text, (styles && styles.text))
+  
+  return renderFromType(Children, { style }, Text)
 
 }
 
 export const ButtonWrapper = props => {
   const theme = useTheme()
-  
+
   const {
     Element,
     children,
@@ -33,44 +36,41 @@ export const ButtonWrapper = props => {
     isWeb,
     onClick,
     onPress,
+    outline,
+    contained,
     ref,
-    styleId,
     style,
     styles,
     text,
     type,
     ...elProps
   } = props
-  
-  const builtStyles = buildStyles(styleId, theme, type)
 
-  const [ hoverRef, hoverStyle ] = useThemeHover(
-    builtStyles.normal,
-    get(theme, 'components.button.hover'),
-    { ref }
-  )
+  const btnTheme = get(theme, [ 'components', 'button' ], [])
+  const btnType = outline && 'outline' || contained && 'contained' || type
+  const builtStyles = btnTheme[btnType] || btnTheme.default
 
-  const [ useRef, useStyle ] = useThemeActive(
-    hoverStyle,
-    get(theme, 'components.button.active'),
-    { ref: hoverRef }
+  const [ hoverRef, activeStyle ] = useThemeHover(
+    builtStyles.default,
+    builtStyles.hover,
+    { ref, noMerge: true }
   )
 
   return (
     <Element
       elProps={ elProps }
-      ref={ useRef }
+      ref={ hoverRef }
       disabled={ disabled }
       style={ theme.join(
-        useStyle,
-        styles && styles.normal,
-        disabled && builtStyles.disabled,
+        activeStyle.main,
+        styles && styles.button,
+        disabled && get(builtStyles, [ 'disabled', 'main' ]),
         disabled && styles && styles.disabled,
         style
       )}
-      children={ children || text || 'button' }
+      children={ getChildren(children || text, theme, activeStyle, styles) }
       { ...getPressHandler(isWeb, onClick, onPress) }
-      { ...getActiveOpacity(isWeb, props, useStyle) }
+      { ...getActiveOpacity(isWeb, props, activeStyle) }
     />
   )
 
@@ -80,7 +80,8 @@ ButtonWrapper.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
-    PropTypes.array
+    PropTypes.array,
+    PropTypes.func,
   ]),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

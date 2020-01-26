@@ -118,3 +118,16 @@ export const colors = {
 		red02: "#b10000",
   },
 }
+
+
+// Blue 
+// normal
+// 0070f2
+// hover
+// 0b50f1
+
+// Red
+// normal
+// rgb(177, 0, 0);
+// hover
+// rgb(144, 15, 15);

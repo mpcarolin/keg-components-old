@@ -31,7 +31,6 @@ const Element = React.forwardRef(({ elProps, children, ...props }, ref) => {
 
 export const Button = props => (
   <ButtonWrapper
-    styleId={ `keg-web-button` }
     { ...props }
     Element={ Element }
     isWeb={ true }
@@ -42,7 +41,8 @@ Button.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
-    PropTypes.array
+    PropTypes.array,
+    PropTypes.func,
   ]),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
