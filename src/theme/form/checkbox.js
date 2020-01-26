@@ -47,7 +47,7 @@ export const checkbox = {
       left: 0,
       height: height,
       width: width,
-      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity.opacity15') }`,
+      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity._15') }`,
       backgroundColor: get(colors, 'palette.white04'),
       borderRadius: get(defaults, 'form.border.radius', 5),
     }

@@ -1,9 +1,9 @@
-import { defaultBtn } from './default'
 import { contained } from './contained'
+import { text } from './text'
 import { outline } from './outline'
 
 export const button = {
-  default: defaultBtn,
   contained,
+  text,
   outline
 }

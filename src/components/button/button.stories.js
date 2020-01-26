@@ -9,8 +9,8 @@ import { StoryWrap } from 'StoryWrap'
 const TextComp = props => (<Text { ...props } >Keg Button</Text>)
 const buttonStyle = { width: 150 }
 
-storiesOf('Button', module)
-  .add('Default', () =>
+storiesOf('Button | Contained', module)
+  .add('Normal', () =>
     <StoryWrap style={{ textAlign: 'center' }} >
 
       <Button 
@@ -22,7 +22,22 @@ storiesOf('Button', module)
 
     </StoryWrap>
   )
-  .add('Outline', () =>
+  .add('Disabled', () =>
+    <StoryWrap style={{ textAlign: 'center' }} >
+
+      <Button 
+        disabled
+        style={ buttonStyle }
+        onClick={ action("Disabled Button Clicked!") }
+      >
+        { TextComp }
+      </Button>
+
+    </StoryWrap>
+  )
+
+storiesOf('Button | Outline', module)
+  .add('Normal', () =>
     <StoryWrap style={{ textAlign: 'center' }} >
 
       <Button 
@@ -39,7 +54,37 @@ storiesOf('Button', module)
     <StoryWrap style={{ textAlign: 'center' }} >
 
       <Button 
-        disabled={ true }
+        outline
+        disabled
+        style={ buttonStyle }
+        onClick={ action("Disabled Button Clicked!") }
+      >
+        { TextComp }
+      </Button>
+
+    </StoryWrap>
+  )
+
+storiesOf('Button | Text', module)
+  .add('Normal', () =>
+    <StoryWrap style={{ textAlign: 'center' }} >
+
+      <Button
+        text
+        style={ buttonStyle }
+        onClick={ action("Disabled Button Clicked!") }
+      >
+        { TextComp }
+      </Button>
+
+    </StoryWrap>
+  )
+  .add('Disabled', () =>
+    <StoryWrap style={{ textAlign: 'center' }} >
+
+      <Button
+        text
+        disabled
         style={ buttonStyle }
         onClick={ action("Disabled Button Clicked!") }
       >

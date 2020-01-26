@@ -29,7 +29,7 @@ export const switchStyles = {
     $web: {
       outline: 'none',
       backgroundColor: get(colors, 'palette.gray03'),
-      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity.opacity15') }`,
+      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity._15') }`,
       borderRadius: get(defaults, 'form.border.radius', 5) * 2,
       height: '70%',
       width: '100%',
@@ -42,7 +42,7 @@ export const switchStyles = {
       outline: 'none',
       backgroundColor: get(colors, 'palette.white04'),
       borderRadius: get(defaults, 'form.border.radius', 5) * 2,
-      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity.opacity15') }`,
+      boxShadow: `inset 0px 0px 5px ${ get(colors, 'opacity._15') }`,
       marginLeft: 0,
       cursor: 'pointer',
       height: height,
@@ -57,7 +57,7 @@ export const switchStyles = {
     $web: {
       left: width,
       backgroundColor: get(colors, 'palette.green02'),
-      boxShadow: `1px 1px 3px ${ get(colors, 'opacity.opacity50') }`,
+      boxShadow: `1px 1px 3px ${ get(colors, 'opacity._50') }`,
     }
   },
   disabled: {

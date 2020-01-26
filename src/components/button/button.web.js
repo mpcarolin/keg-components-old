@@ -47,8 +47,9 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onPress: PropTypes.func,
+  outline: PropTypes.bool,
   ref: PropTypes.object,
   style: PropTypes.object,
-  text: PropTypes.string,
+  text: PropTypes.bool,
   type: PropTypes.string,
 }

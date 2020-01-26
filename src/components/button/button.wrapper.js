@@ -10,20 +10,9 @@ import {
   renderFromType
 } from '../../utils'
 
-const buildStyles = (styles, theme, type) => {
 
-  const btnTheme = get(theme, [ 'components', 'button' ], [])
-
-  return btnTheme[type] || btnTheme.default
-
-}
-
-const getChildren = (Children, theme, activeStyle, styles) => {
-  
-  const style = theme.join(activeStyle.text, (styles && styles.text))
-  
-  return renderFromType(Children, { style }, Text)
-
+const getChildren = (Children, theme, activeStyle, styles={}) => {
+  return renderFromType(Children, { style: theme.join(activeStyle.content, styles.content) }, Text)
 }
 
 export const ButtonWrapper = props => {
@@ -32,6 +21,7 @@ export const ButtonWrapper = props => {
   const {
     Element,
     children,
+    content,
     disabled,
     isWeb,
     onClick,
@@ -47,8 +37,8 @@ export const ButtonWrapper = props => {
   } = props
 
   const btnTheme = get(theme, [ 'components', 'button' ], [])
-  const btnType = outline && 'outline' || contained && 'contained' || type
-  const builtStyles = btnTheme[btnType] || btnTheme.default
+  const btnType = type || outline && 'outline' || text && 'text'
+  const builtStyles = btnTheme[btnType || 'contained' ]
 
   const [ hoverRef, activeStyle ] = useThemeHover(
     builtStyles.default,
@@ -63,12 +53,12 @@ export const ButtonWrapper = props => {
       disabled={ disabled }
       style={ theme.join(
         activeStyle.main,
-        styles && styles.button,
+        styles && get(styles, [ 'button', 'main' ]),
         disabled && get(builtStyles, [ 'disabled', 'main' ]),
-        disabled && styles && styles.disabled,
+        disabled && styles && get(styles, [ 'button', 'disabled' ]),
         style
       )}
-      children={ getChildren(children || text, theme, activeStyle, styles) }
+      children={ getChildren(children || content, theme, activeStyle, styles) }
       { ...getPressHandler(isWeb, onClick, onPress) }
       { ...getActiveOpacity(isWeb, props, activeStyle) }
     />
@@ -83,11 +73,17 @@ ButtonWrapper.propTypes = {
     PropTypes.array,
     PropTypes.func,
   ]),
+  content: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onPress: PropTypes.func,
+  outline: PropTypes.bool,
   ref: PropTypes.object,
   style: PropTypes.object,
-  text: PropTypes.string,
   type: PropTypes.string,
 }

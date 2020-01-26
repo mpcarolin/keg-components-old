@@ -66,18 +66,22 @@ const opacity = (amount, color) => {
       : `rgba(${color || '0,0,0'}, ${amount})`
 }
 
-opacity.opacity100 = opacity(1)
-opacity.opacity90 = opacity(.90)
-opacity.opacity85 = opacity(.85)
-opacity.opacity75 = opacity(.75)
-opacity.opacity60 = opacity(.60)
-opacity.opacity50 = opacity(.50)
-opacity.opacity30 = opacity(.30)
-opacity.opacity25 = opacity(.25)
-opacity.opacity15 = opacity(.15)
-opacity.opacity10 = opacity(.10)
-opacity.opacity05 = opacity(.05)
-opacity.opacity00 = opacity(.00)
+opacity._100 = opacity(1)
+opacity._90 = opacity(.90)
+opacity._85 = opacity(.85)
+opacity._80 = opacity(.80)
+opacity._75 = opacity(.75)
+opacity._70 = opacity(.70)
+opacity._60 = opacity(.60)
+opacity._50 = opacity(.50)
+opacity._40 = opacity(.40)
+opacity._30 = opacity(.30)
+opacity._25 = opacity(.25)
+opacity._20 = opacity(.20)
+opacity._15 = opacity(.15)
+opacity._10 = opacity(.10)
+opacity._05 = opacity(.05)
+opacity._00 = opacity(.00)
 
 export const colors = {
   helpers: {

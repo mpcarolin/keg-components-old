@@ -1,19 +1,16 @@
 import { colors } from '../../colors'
 import { inheritFrom } from '../../../utils'
-import { containedStyles } from './contained'
 import { get } from 'jsutils'
+import { containedStyles } from './contained'
 
-const defWhite = get(colors, 'palette.white01')
+const transparent = get(colors, 'opacity._00')
+const defBlack = get(colors, 'opacity._90')
 
-const outlineStyles = {
+const textStyles = {
   default: {
     main: {
       $all: {
-        borderColor: get(colors, 'opacity._20'),
-        borderWidth: 1,
-        padding: 8,
-        backgroundColor: defWhite,
-        outline: 'none',
+        backgroundColor: transparent,
       },
       $web: {
 
@@ -23,7 +20,7 @@ const outlineStyles = {
     },
     content: {
       $all: {
-        color: get(colors, [ 'opacity', '_80' ]),
+        color: defBlack,
       },
       $web: {
         
@@ -46,7 +43,7 @@ const outlineStyles = {
     },
     content: {
       $all: {
-        color: get(colors, 'opacity._50'),
+
       },
       $web: {
         
@@ -103,16 +100,15 @@ const outlineStyles = {
         
       }
     }
-  }
+  },
 }
 
-const outline = {}
-outline.default = inheritFrom(containedStyles.default, outlineStyles.default)
-outline.disabled = inheritFrom(outline.default, containedStyles.disabled, outlineStyles.disabled)
-outline.hover = inheritFrom(outline.default, containedStyles.hover, outlineStyles.hover)
-outline.active = inheritFrom(outline.hover, outlineStyles.active)
+const text = {}
+text.default = inheritFrom(containedStyles.default, textStyles.default)
+text.disabled = inheritFrom(text.default, containedStyles.disabled, textStyles.disabled)
+text.hover = inheritFrom(text.default, containedStyles.hover, textStyles.hover)
+text.active = inheritFrom(text.hover, textStyles.active)
 
 export {
-  outline,
-  outlineStyles
+  text
 }
