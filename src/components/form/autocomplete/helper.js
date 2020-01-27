@@ -37,8 +37,8 @@ export const getAutocompleteItems = (text, possibleValues) => {
 }
 
 /**
- * TODO: Remove this once these functions are approved/merged in jsutils
  * Returns true if aString includes bString as a substring after applying the functions identified by transformFuncs 
+ * TODO: Remove this if these functions are approved/merged into jsutils
  * @param {String} aString
  * @param {String} bString 
  * @param {Array} transformFuncs functions which transform aString and bString before the substring check
