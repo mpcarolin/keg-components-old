@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTheme, useThemeActive, useThemeHover } from 'KegReTheme'
+import { useStyles } from '../../hooks'
 import { get, isFunc } from 'jsutils'
 import PropTypes from 'prop-types'
 import { Text } from '../typography/text'
 import {
-  getPressHandler,
+  buildCompStyles,
   getActiveOpacity,
+  getPressHandler,
   isValidComponent,
   renderFromType
 } from '../../utils'
-
 
 const getChildren = (Children, theme, activeStyle, styles={}) => {
   return renderFromType(Children, { style: theme.join(activeStyle.content, styles.content) }, Text)
@@ -23,26 +24,34 @@ export const ButtonWrapper = props => {
     children,
     content,
     disabled,
+    danger,
     isWeb,
     onClick,
     onPress,
     outline,
     contained,
+    primary,
     ref,
     style,
     styles,
+    secondary,
     text,
     type,
+    warn,
     ...elProps
   } = props
 
-  const btnTheme = get(theme, [ 'components', 'button' ], [])
-  const btnType = type || outline && 'outline' || text && 'text'
-  const builtStyles = btnTheme[btnType || 'contained' ]
+
+  const [ btnStyles, setBtnStyles ] = useStyles(
+    theme,
+    `components.button`,
+    [ { type, outline, text, contained }, 'contained' ],
+    [ { primary, secondary, warn, danger }, 'primary' ]
+  )
 
   const [ hoverRef, activeStyle ] = useThemeHover(
-    builtStyles.default,
-    builtStyles.hover,
+    btnStyles.default,
+    btnStyles.hover,
     { ref, noMerge: true }
   )
 
@@ -54,7 +63,7 @@ export const ButtonWrapper = props => {
       style={ theme.join(
         activeStyle.main,
         styles && get(styles, [ 'button', 'main' ]),
-        disabled && get(builtStyles, [ 'disabled', 'main' ]),
+        disabled && get(btnStyles, [ 'disabled', 'main' ]),
         disabled && styles && get(styles, [ 'button', 'disabled' ]),
         style
       )}

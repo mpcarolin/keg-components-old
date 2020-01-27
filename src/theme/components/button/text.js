@@ -1,7 +1,7 @@
 import { colors } from '../../colors'
 import { inheritFrom } from '../../../utils'
 import { get } from 'jsutils'
-import { containedStyles } from './contained'
+import { containedStates } from './contained'
 
 const transparent = get(colors, 'opacity._00')
 const defBlack = get(colors, 'opacity._90')
@@ -104,9 +104,9 @@ const textStyles = {
 }
 
 const text = {}
-text.default = inheritFrom(containedStyles.default, textStyles.default)
-text.disabled = inheritFrom(text.default, containedStyles.disabled, textStyles.disabled)
-text.hover = inheritFrom(text.default, containedStyles.hover, textStyles.hover)
+text.default = inheritFrom(containedStates.default, textStyles.default)
+text.disabled = inheritFrom(text.default, containedStates.disabled, textStyles.disabled)
+text.hover = inheritFrom(text.default, containedStates.hover, textStyles.hover)
 text.active = inheritFrom(text.hover, textStyles.active)
 
 export {

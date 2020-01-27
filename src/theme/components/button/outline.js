@@ -1,11 +1,11 @@
 import { colors } from '../../colors'
 import { inheritFrom } from '../../../utils'
-import { containedStyles } from './contained'
+import { containedStates } from './contained'
 import { get } from 'jsutils'
 
 const defWhite = get(colors, 'palette.white01')
 
-const outlineStyles = {
+const outlineStates = {
   default: {
     main: {
       $all: {
@@ -107,12 +107,12 @@ const outlineStyles = {
 }
 
 const outline = {}
-outline.default = inheritFrom(containedStyles.default, outlineStyles.default)
-outline.disabled = inheritFrom(outline.default, containedStyles.disabled, outlineStyles.disabled)
-outline.hover = inheritFrom(outline.default, containedStyles.hover, outlineStyles.hover)
-outline.active = inheritFrom(outline.hover, outlineStyles.active)
+outline.default = inheritFrom(containedStates.default, outlineStates.default)
+outline.disabled = inheritFrom(outline.default, containedStates.disabled, outlineStates.disabled)
+outline.hover = inheritFrom(outline.default, containedStates.hover, outlineStates.hover)
+outline.active = inheritFrom(outline.hover, outlineStates.active)
 
 export {
   outline,
-  outlineStyles
+  outlineStates
 }

@@ -1,4 +1,5 @@
 export * from './getActiveOpacity'
+export * from './getActiveKey'
 export * from './getChecked'
 export * from './getImgSrc'
 export * from './getInputValue'

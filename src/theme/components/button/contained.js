@@ -3,19 +3,12 @@ import { inheritFrom } from '../../../utils'
 import { transition } from '../../transition'
 import { get } from 'jsutils'
 
-const defWhite = get(colors, 'palette.white01')
-const defGreen = get(colors, 'palette.green02')
-const hoverGreen = get(colors, 'palette.green03')
-const activeGreen = get(colors, 'palette.green04')
-
-const contained = {}
-const containedStyles = {
+const containedStates = {
   default: {
     main: {
       $all: {
         borderWidth: 0,
         borderRadius: 4,
-        backgroundColor: defGreen,
         padding: 9,
         minHeight: 35,
         outline: 'none',
@@ -31,11 +24,11 @@ const containedStyles = {
     },
     content: {
       $all: {
+        color: get(colors, 'palette.white01'),
         fontSize: 14,
         fontWeight: '500',
         letterSpacing: 0.5,
         textAlign: 'center',
-        color: defWhite,
         ...transition([ 'color' ], 0.15),
       },
       $web: {},
@@ -64,7 +57,7 @@ const containedStyles = {
   hover: {
     main: {
       $all: {
-        backgroundColor: hoverGreen,
+        backgroundColor: get(colors, 'surface.primary.dark'),
       },
       $web: {},
       $native: {}
@@ -86,15 +79,68 @@ const containedStyles = {
       $web: {},
       $native: {}
     }
+  },
+}
+
+const contained = {
+  primary: {
+    default: {
+      main: {
+        backgroundColor: get(colors, 'surface.primary.main'),
+      },
+    },
+    hover: {
+      main: {
+        backgroundColor: get(colors, 'surface.primary.dark'),
+      }
+    }
+  },
+  secondary: {
+    default: {
+      main: {
+        backgroundColor: get(colors, 'surface.secondary.main'),
+      },
+    },
+    hover: {
+      main: {
+        backgroundColor: get(colors, 'surface.secondary.dark'),
+      }
+    }
+  },
+  warn: {
+    default: {
+      main: {
+        backgroundColor: get(colors, 'surface.warn.main'),
+      },
+    },
+    hover: {
+      main: {
+        backgroundColor: get(colors, 'surface.warn.dark'),
+      }
+    }
+  },
+  danger: {
+    default: {
+      main: {
+        backgroundColor: get(colors, 'surface.danger.main'),
+      },
+    },
+    hover: {
+      main: {
+        backgroundColor: get(colors, 'surface.danger.dark'),
+      }
+    }
   }
 }
 
-contained.default = inheritFrom(containedStyles.default, {})
-contained.disabled = inheritFrom(contained.default, containedStyles.disabled, {})
-contained.hover = inheritFrom(contained.default, containedStyles.hover, {})
-contained.active = inheritFrom(contained.default, containedStyles.hover, containedStyles.active, {})
+
+contained.default = inheritFrom(containedStates.default, {})
+contained.disabled = inheritFrom(contained.default, containedStates.disabled, {})
+contained.hover = inheritFrom(contained.default, containedStates.hover, {})
+contained.active = inheritFrom(contained.default, containedStates.hover, containedStates.active, {})
+
 
 export {
   contained,
-  containedStyles
+  containedStates,
 }
