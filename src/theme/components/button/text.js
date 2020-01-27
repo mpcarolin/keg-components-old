@@ -4,106 +4,58 @@ import { get } from 'jsutils'
 import { containedStates } from './contained'
 
 const transparent = get(colors, 'opacity._00')
-const defBlack = get(colors, 'opacity._90')
 
 const textStyles = {
   default: {
     main: {
-      $all: {
-        backgroundColor: transparent,
-      },
-      $web: {
-
-      },
-      $native: {
-      }
+      backgroundColor: transparent,
     },
     content: {
-      $all: {
-        color: defBlack,
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
+      color: get(colors, 'opacity._80'),
     }
   },
   disabled: {
-    main: {
-      $all: {
-        
-      },
-      $web: {
-
-      },
-      $native: {
-      }
-    },
-    content: {
-      $all: {
-
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    }
+    main: {},
+    content: {}
   },
   hover: {
     main: {
-      $all: {
-        backgroundColor: get(colors, 'opacity._10'),
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
+      backgroundColor: get(colors, 'palette.white03'),
     },
-    content: {
-      $all: {
-
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    }
+    content: {}
   },
   active: {
-    main: {
-      $all: {
-        
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    },
-    content: {
-      $all: {
-
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    }
+    main: {},
+    content: {}
   },
 }
 
-const text = {}
+const buildColorStyle = color => {
+  return {
+    default: {
+      main: {},
+      content: {
+        color: color,
+      }
+    },
+    hover: {
+      main: {
+        backgroundColor: colors.opacity(10, color),
+      },
+      content: {
+        color: color,
+      }
+    }
+  }
+}
+
+const text = {
+  primary: buildColorStyle(get(colors, 'surface.primary.main')),
+  secondary: buildColorStyle(get(colors, 'surface.secondary.main')),
+  warn: buildColorStyle(get(colors, 'surface.warn.main')),
+  danger: buildColorStyle(get(colors, 'surface.danger.main')),
+}
+
 text.default = inheritFrom(containedStates.default, textStyles.default)
 text.disabled = inheritFrom(text.default, containedStates.disabled, textStyles.disabled)
 text.hover = inheritFrom(text.default, containedStates.hover, textStyles.hover)

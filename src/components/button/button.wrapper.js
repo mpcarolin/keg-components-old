@@ -46,7 +46,7 @@ export const ButtonWrapper = props => {
     theme,
     `components.button`,
     [ { type, outline, text, contained }, 'contained' ],
-    [ { primary, secondary, warn, danger }, 'primary' ]
+    [ { primary, secondary, warn, danger }, 'default' ]
   )
 
   const [ hoverRef, activeStyle ] = useThemeHover(

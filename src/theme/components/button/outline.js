@@ -3,113 +3,67 @@ import { inheritFrom } from '../../../utils'
 import { containedStates } from './contained'
 import { get } from 'jsutils'
 
-const defWhite = get(colors, 'palette.white01')
-
 const outlineStates = {
   default: {
     main: {
-      $all: {
-        borderColor: get(colors, 'opacity._20'),
-        borderWidth: 1,
-        padding: 8,
-        backgroundColor: defWhite,
-        outline: 'none',
-      },
-      $web: {
-
-      },
-      $native: {
-      }
+      padding: 8,
+      outline: 'none',
+      borderWidth: 1,
+      borderColor: get(colors, 'surface.default.main'),
+      backgroundColor: get(colors, 'palette.white01'),
     },
     content: {
-      $all: {
-        color: get(colors, [ 'opacity', '_80' ]),
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
+      color: get(colors, 'opacity._80'),
     }
   },
   disabled: {
-    main: {
-      $all: {
-        
-      },
-      $web: {
-
-      },
-      $native: {
-      }
-    },
-    content: {
-      $all: {
-        color: get(colors, 'opacity._50'),
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    }
+    main: {},
+    content: {}
   },
   hover: {
     main: {
-      $all: {
-        backgroundColor: get(colors, 'opacity._10'),
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
+      backgroundColor: get(colors, 'palette.white03'),
     },
-    content: {
-      $all: {
-
-      },
-      $web: {
-        
-      },
-      $native: {
-        
-      }
-    }
+    content: {}
   },
   active: {
-    main: {
-      $all: {
-        
+    main: {},
+    content: {}
+  }
+}
+
+const buildColorStyle = color => {
+  return {
+    default: {
+      main: {
+        borderColor: color,
       },
-      $web: {
-        
-      },
-      $native: {
-        
+      content: {
+        color: color,
       }
     },
-    content: {
-      $all: {
-
+    hover: {
+      main: {
+        borderColor: color,
+        backgroundColor: colors.opacity(10, color),
       },
-      $web: {
-        
-      },
-      $native: {
-        
+      content: {
+        color: color,
       }
     }
   }
 }
 
-const outline = {}
+const outline = {
+  primary: buildColorStyle(get(colors, 'surface.primary.main')),
+  secondary: buildColorStyle(get(colors, 'surface.secondary.main')),
+  warn: buildColorStyle(get(colors, 'surface.warn.main')),
+  danger: buildColorStyle(get(colors, 'surface.danger.main')),
+}
+
 outline.default = inheritFrom(containedStates.default, outlineStates.default)
 outline.disabled = inheritFrom(outline.default, containedStates.disabled, outlineStates.disabled)
-outline.hover = inheritFrom(outline.default, containedStates.hover, outlineStates.hover)
+outline.hover = inheritFrom(outline.default, outlineStates.hover)
 outline.active = inheritFrom(outline.hover, outlineStates.active)
 
 export {

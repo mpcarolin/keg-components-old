@@ -9,12 +9,13 @@ const containedStates = {
       $all: {
         borderWidth: 0,
         borderRadius: 4,
+        backgroundColor: get(colors, 'surface.default.main'),
         padding: 9,
         minHeight: 35,
         outline: 'none',
         textAlign: 'center',
         margin: 'auto',
-        ...transition([ 'backgroundColor', 'borderColor' ], 0.8),
+        ...transition([ 'backgroundColor', 'borderColor' ], 0.3),
       },
       $web: {
         cursor: 'pointer',
@@ -23,16 +24,12 @@ const containedStates = {
       $native: {}
     },
     content: {
-      $all: {
-        color: get(colors, 'palette.white01'),
-        fontSize: 14,
-        fontWeight: '500',
-        letterSpacing: 0.5,
-        textAlign: 'center',
-        ...transition([ 'color' ], 0.15),
-      },
-      $web: {},
-      $native: {}
+      color: get(colors, 'palette.white01'),
+      fontSize: 14,
+      fontWeight: '500',
+      letterSpacing: 0.5,
+      textAlign: 'center',
+      ...transition([ 'color' ], 0.15),
     }
   },
   disabled: {
@@ -47,98 +44,39 @@ const containedStates = {
       $native: {}
     },
     content: {
-      $all: {
-        opacity: 0.4
-      },
-      $web: {},
-      $native: {}
+      color: get(colors, 'opacity._50'),
     }
   },
   hover: {
     main: {
-      $all: {
-        backgroundColor: get(colors, 'surface.primary.dark'),
-      },
-      $web: {},
-      $native: {}
+      backgroundColor: get(colors, 'surface.default.dark'),
     },
-    content: {
-      $all: {},
-      $web: {},
-      $native: {}
-    }
+    content: {}
   },
   active: {
-    main: {
-      $all: {},
-      $web: {},
-      $native: {}
-    },
-    content: {
-      $all: {},
-      $web: {},
-      $native: {}
-    }
+    main: {},
+    content: {}
   },
 }
 
-const contained = {
-  primary: {
-    default: {
-      main: {
-        backgroundColor: get(colors, 'surface.primary.main'),
-      },
-    },
-    hover: {
-      main: {
-        backgroundColor: get(colors, 'surface.primary.dark'),
-      }
-    }
-  },
-  secondary: {
-    default: {
-      main: {
-        backgroundColor: get(colors, 'surface.secondary.main'),
-      },
-    },
-    hover: {
-      main: {
-        backgroundColor: get(colors, 'surface.secondary.dark'),
-      }
-    }
-  },
-  warn: {
-    default: {
-      main: {
-        backgroundColor: get(colors, 'surface.warn.main'),
-      },
-    },
-    hover: {
-      main: {
-        backgroundColor: get(colors, 'surface.warn.dark'),
-      }
-    }
-  },
-  danger: {
-    default: {
-      main: {
-        backgroundColor: get(colors, 'surface.danger.main'),
-      },
-    },
-    hover: {
-      main: {
-        backgroundColor: get(colors, 'surface.danger.dark'),
-      }
-    }
+const buildColorStyle = colorStyle => {
+  return {
+    default: { main: { backgroundColor: colorStyle.main } },
+    hover: { main: { backgroundColor: colorStyle.dark } }
   }
 }
 
+const contained = {
+  primary: buildColorStyle(get(colors, 'surface.primary')),
+  secondary: buildColorStyle(get(colors, 'surface.secondary')),
+  warn: buildColorStyle(get(colors, 'surface.warn')),
+  danger: buildColorStyle(get(colors, 'surface.danger')),
+}
 
 contained.default = inheritFrom(containedStates.default, {})
 contained.disabled = inheritFrom(contained.default, containedStates.disabled, {})
 contained.hover = inheritFrom(contained.default, containedStates.hover, {})
 contained.active = inheritFrom(contained.default, containedStates.hover, containedStates.active, {})
-
 
 export {
   contained,

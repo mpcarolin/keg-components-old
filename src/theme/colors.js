@@ -49,6 +49,8 @@ const hexToRgba = (hex, opacity, asObj) => {
 
   hex = hex.indexOf('#') === 0 ? hex.replace('#', '') : hex
   
+  opacity = opacity > 1 ? (opacity / 100).toFixed(4) : opacity
+  
   const rgbaObj = {
     r: parseInt(hex.substring(0, 2), 16),
     g: parseInt(hex.substring(2, 4), 16),
@@ -91,7 +93,7 @@ const opacity = (amount, color) => {
 
 // Map opacity amounts by .5
 for(let amount = 100; amount >= 0;  amount-=5)
-  opacity[`_${amount}`] = opacity((amount * 0.01).toFixed(2))
+  opacity[`_${amount}`] = opacity((amount / 100).toFixed(2))
 
 
 const palette = {
@@ -101,7 +103,7 @@ const palette = {
   white03: '#f5f5f5',
   white04: '#f0f0f0',
   gray01: '#e6e6e6',
-  gray02: '#cccccc',
+  gray02: '#dddddd',
   gray03: '#b3b3b3',
   gray04: '#999999',
   black01: '#666666',
@@ -122,8 +124,12 @@ const palette = {
   red03: shadeHex('#f51f10', -20),
 }
 
-
 const surface = {
+  default: {
+    main: palette.gray04,
+    light: palette.gray03,
+    dark: palette.black01,
+  },
   primary: {
     main: palette.green02,
     light: palette.green01,
