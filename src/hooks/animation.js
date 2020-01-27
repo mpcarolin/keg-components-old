@@ -6,9 +6,10 @@ import { Animated } from 'react-native'
  * @param {Object} options - options object
  * @param {*} options.from - start point
  * @param {*} options.to - end point
- * @param {*} options.current - point that animated component is currently in (either `from` or `to`).
- * @param {Number} options.duration - time in milliseconds that the animation should proceed
- * @param {Boolean} options.animateOnFirstRender - if false, won't animate the from-to value on first render. It will merely return the options.current value.
+ * @param {*} options.current - point that animated component is currently in (either `from` value or `to`).
+ * @param {Number} options.duration - time in milliseconds that the animation should take to complete
+ * @param {Boolean} options.animateOnFirstRender - if false, won't animate the from-to value on first render. 
+ *  It will merely return the options.current value. Defaults to false.
  * @returns tuple of form [ Animated.Value, nextState, nextValue ]
  *  - Animated.Value: pass this value to your Animated.View to begin the animation
  *  - nextState: the state we are animating *to* (either string 'from' or string 'to', since the animation toggles back and forth)
