@@ -5,6 +5,8 @@ import { useAutocompleteItems } from 'KegHooks/autocomplete'
 import { ScrollableSelect } from 'KegScrollableSelect'
 import { Input } from 'KegInput'
 import { View } from 'KegView'
+import { getTextFromChangeEvent } from 'KegHelpers'
+import { checkCall } from 'jsutils/cjs/method'
 
 
 /**
@@ -51,9 +53,10 @@ export const Autocomplete = (props) => {
         type={'text'}
         style={ theme.join(theme.form.autocomplete.input, theme.typography.font, inputStyle) }
         placeholder={placeholder}
-        onChangeText={txt => {
-          updateText(txt)
-          onChange && onChange(txt)
+        onChange={event => {
+          const text = getTextFromChangeEvent(event)
+          updateText(text)
+          checkCall(onChange, text)
         }}
         value={inputText}
         ref={inputRef}

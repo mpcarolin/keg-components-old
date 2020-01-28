@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { useTheme } from 're-theme'
+import { P } from 'KegTypography'
 
 /**
  * An item in a select box, to be selected
@@ -21,9 +22,9 @@ export const SelectItem = ({ text, onSelect=() => {} }) => {
       onMouseEnter={() => setHighlight(true)}
       onMouseLeave={() => setHighlight(false)}
     >
-      <Text style={theme.form.autocomplete.item}>
+      <P style={theme.form.autocomplete.item}>
         { text }
-      </Text>
+      </P>
     </TouchableOpacity>
   )
 }

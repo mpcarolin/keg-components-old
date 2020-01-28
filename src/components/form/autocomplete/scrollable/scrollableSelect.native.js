@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Animated, FlatList, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Animated, FlatList }  from 'react-native'
 import PropTypes from 'prop-types'
 import { useFromToAnimation } from 'KegHooks'
 import { useTheme } from 're-theme'
@@ -25,7 +25,7 @@ export const ScrollableSelect = ({ items, style={}, visible=true, onSelect=() =>
   const [ animatedHeight ] = useFromToAnimation({ current, from: 0, to: height, duration: animationDuration, })
 
   return (
-      <Animated.View style={{ style, ...theme.form.autocomplete.menu, height: animatedHeight }}>
+      <Animated.View style={ theme.join(theme.form.autocomplete.menu, style, { height: animatedHeight }) }>
         <FlatList
           data={items}
           keyExtractor={item => item.key || item.text}

@@ -11,14 +11,13 @@ import { SelectItem } from 'KegScrollableSelectItem'
  * @param {Object} props.theme - theme object
  * @param {Function} props.onSelect - the callback of form (item) => {...}. Fires when a menu item is selected
  * @param {Number} props.height - the maximum height of the menu before scrolling is required to see remaining items.
- * @param {Number} props.animationDuration - the duration (in milliseconds) of the menu's open/close animation. Defaults to 200ms
  */
 export const ScrollableSelect = ({ items, style={}, visible=true, onSelect=() => {}, height=150, }) => {
   const theme = useTheme()
   const display = visible ? 'block' : 'none'
 
   return (
-    <div style={{ display, ...theme.form.autocomplete.menu, height, style }}>
+    <div style={{ ...theme.form.autocomplete.menu, ...style, display, height }}>
       {
         items.map(
           ({text, key}) => <SelectItem 

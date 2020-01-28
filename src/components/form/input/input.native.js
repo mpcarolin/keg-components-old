@@ -5,18 +5,12 @@ import PropTypes from 'prop-types'
 import { TextInput } from 'react-native'
 
 export const Input = withTheme(props => {
-  const { theme, children, style, onClick, onPress, onChange, onChangeText, ...args } = props
-
-  const handleChange = (text) => {
-    onChange && onChange(text)
-    onChangeText && onChangeText(text)
-  }
+  const { theme, children, style, onClick, onPress, ...args } = props
 
   return (
     <TextInput
       { ...args }
       style={ theme.join(get(theme, ['form', 'input', 'default' ]), style) }
-      onChangeText={ handleChange }
       onPress={ onClick || onPress }
     />
   )
