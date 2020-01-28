@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTheme } from 're-theme'
-import { useAutocompleteItems } from './helper'
-import { ScrollableSelect } from './scrollable/scrollableSelect'
+import { useAutocompleteItems } from 'KegHooks/autocomplete'
+import { ScrollableSelect } from 'KegScrollableSelect'
 import { Input } from 'KegInput'
 import { View } from 'KegView'
 
@@ -19,7 +19,6 @@ import { View } from 'KegView'
  * @param {Object} props.inputStyle - (optional) style object for the text input 
  * @param {Object} props.menuStyle - (optional) style object for the select menu
  * @param {Object} props.inputRef - (optional) a ref that will be assigned to the TextInput. Use this for obtaining access to TextInput functions like Clear
- * @param {Function} props.onSubmitEditing - (optional) callback when user presses enter on web
  * @param {Array} props.values - array of possible strings to use for autocomplete
  * @param {Number} props.menuHeight - (optional) height of menu that shows autocomplete values, before scrolling is necessary
  */
@@ -34,7 +33,6 @@ export const Autocomplete = (props) => {
     inputStyle={},
     menuStyle={},
     inputRef=null,
-    onSubmitEditing,
     values=[],
     menuHeight=75
   } = props
@@ -44,12 +42,13 @@ export const Autocomplete = (props) => {
   const [ inputText, updateText ] = useState(text || '')
   const [ autocompleteItems, setSelectedItem ] = useAutocompleteItems(inputText, values)
 
-  const onSelectItem = ({ text }) => [ updateText, setSelectedItem, onSelect ].map(fn => fn && fn(text))
+  const onSelectItem = ({ text='' }) => [ updateText, setSelectedItem, onSelect ].map(fn => fn && fn(text))
   const showMenu = (autocompleteItems.length > 0)
 
   return (
     <View style={ style }>
       <Input
+        type={'text'}
         style={ theme.join(theme.form.autocomplete.input, theme.typography.font, inputStyle) }
         placeholder={placeholder}
         onChangeText={txt => {
@@ -58,7 +57,6 @@ export const Autocomplete = (props) => {
         }}
         value={inputText}
         ref={inputRef}
-        onSubmitEditing={(...args) => onSubmitEditing && onSubmitEditing(...args)}
       />
 
       { /* nest select in view so that it appears below the input, but still has absolute positioning */ }
@@ -85,7 +83,6 @@ Autocomplete.propTypes = {
   inputStyle: PropTypes.object,
   menuStyle: PropTypes.object,
   inputRef: PropTypes.object,
-  onSubmitEditing: PropTypes.func,
   values: PropTypes.arrayOf(PropTypes.string),
   menuHeight: PropTypes.number,
 }

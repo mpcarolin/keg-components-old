@@ -11,6 +11,8 @@
   "KegOption": "src/components/form/option/option.${platform}.js",
   "KegRadio": "src/components/form/radio/radio.${platform}.js",
   "KegSelect": "src/components/form/select/select.${platform}.js",
+  "KegScrollableSelect": "src/components/form/autocomplete/scrollable/scrollableSelect.${platform}.js",
+  "KegScrollableSelectItem": "src/components/form/autocomplete/scrollable/item/item.${platform}.js",
   "KegSlider": "src/components/form/slider/slider.${platform}.js",
   "KegSwitch": "src/components/form/switch/switch.${platform}.js",
   "KegText": "src/components/typography/kegtext.${platform}.js",
@@ -19,5 +21,6 @@
   "KegGetPlatform": "src/utils/helpers/getPlatform.${platform}.js",
   "KegTypography": "src/components/typography/",
   "KegHooks": "src/hooks/",
+  "KegUtils": "src/utils/",
   "StoryWrap": ".storybook/storyWrap.js"
 }

@@ -3,6 +3,7 @@ import { Animated, FlatList, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { useFromToAnimation } from 'KegHooks'
 import { useTheme } from 're-theme'
+import { SelectItem } from 'KegScrollableSelectItem'
 
 /**
  * A scrollable menu list of items.
@@ -46,21 +47,4 @@ ScrollableSelect.propTypes = {
   onSelect: PropTypes.func,
   height: PropTypes.number,
   animationDuration: PropTypes.number,
-}
-
-/**
- * An item in a select box, to be selected
- */
-const SelectItem = ({ theme, text, onSelect=() => {} }) => {
-  const [ highlight, setHighlight ] = useState(false)
-  return (
-    <TouchableOpacity
-      style={highlight && theme.form.autocomplete.highlighted}
-      onPress={() => onSelect(text)} 
-      onMouseEnter={() => setHighlight(true)}
-      onMouseLeave={() => setHighlight(false)}
-    >
-      <Text style={theme.form.autocomplete.item}>{ text }</Text>
-    </TouchableOpacity>
-  )
 }

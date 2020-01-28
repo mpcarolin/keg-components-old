@@ -30,9 +30,18 @@ export const autocomplete = {
       height: get(defaults, 'form.input.height', 35),
       fontSize: 16,
       padding: padding.size,
+      width: '100%',
     },
     menu: {
-      width: '100%'
+      width: '100%',
+      overflowY: 'auto',
+      overflowX: 'hidden'
+    },
+    highlighted: {
+      cursor: 'pointer'
+    },
+    item: {
+      padding: 10
     }
   },
   $native: {
