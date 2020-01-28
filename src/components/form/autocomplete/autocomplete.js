@@ -6,7 +6,7 @@ import { ScrollableSelect } from 'KegScrollableSelect'
 import { Input } from 'KegInput'
 import { View } from 'KegView'
 import { getTextFromChangeEvent } from 'KegHelpers'
-import { checkCall } from 'jsutils/cjs/method'
+import { checkCall } from 'jsutils'
 
 
 /**

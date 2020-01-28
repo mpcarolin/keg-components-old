@@ -22,6 +22,5 @@
   "KegTypography": "src/components/typography/",
   "KegHooks": "src/hooks/",
   "KegHelpers": "src/utils/helpers",
-  "KegUtils": "src/utils/",
   "StoryWrap": ".storybook/storyWrap.js"
 }

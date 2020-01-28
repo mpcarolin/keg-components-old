@@ -1,6 +1,6 @@
 import { isEmpty } from 'jsutils'
 import { useState, useEffect } from 'react'
-import { getFilteredStrings } from 'KegUtils/helpers/getFilteredStrings'
+import { getFilteredStrings } from 'KegHelpers'
 
 /**
  * Custom hook for acquiring menu items that are filtered based on text.
